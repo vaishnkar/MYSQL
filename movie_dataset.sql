@@ -1,4 +1,3 @@
-
 use movies;
 create table ticket(
 tno int,seatno int,moviename char(10),time time);
