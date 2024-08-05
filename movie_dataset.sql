@@ -1,4 +1,4 @@
-create database movies;
+
 use movies;
 create table ticket(
 tno int,seatno int,moviename char(10),time time);
@@ -6,7 +6,7 @@ insert into ticket values(101,1,'hangama','02:30:22');
 insert into ticket values(102,2,'don','03:33:12'),
 (103,3,'kakan','02:27:00');
 select * from ticket;
-use movies;
+
 create table customer(cusname char(12),tno int,ticketprice int);
 insert into customer values('vaishnavi',101,100),
 ('payal',102,200),
