@@ -24,3 +24,21 @@ from shop s1
 where price= (select max(s2.price)
 			from shop s2
 			where s1.article= s2.article);
+CREATE TEMPORARY TABLE tmp (
+        article INT(4) UNSIGNED ZEROFILL DEFAULT '0000' NOT NULL,
+        price   DOUBLE(16,2)             DEFAULT '0.00' NOT NULL);
+INSERT INTO tmp SELECT article, MAX(price) FROM shop GROUP BY article;
+
+SELECT shop.article, dealer, shop.price FROM shop, tmp
+WHERE shop.article=tmp.article AND shop.price=tmp.price;
+DROP TABLE tmp;
+SELECT article,
+       SUBSTRING( MAX( CONCAT(LPAD(price,6,'0'),dealer) ), 7) AS dealer,
+  0.00+LEFT(      MAX( CONCAT(LPAD(price,6,'0'),dealer) ), 6) AS price
+FROM   shop
+GROUP BY article;
+ SELECT @min_price:=MIN(price),@max_price:=MAX(price) FROM shop;
+ SELECT * FROM shop WHERE price=@min_price OR price=@max_price;
+
+
+
